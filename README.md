@@ -2,7 +2,7 @@
 
 This guide will walk you through deploying a voting app with five microservices using Kubernetes from Docker samples. The app consists of a web vote app (Python), Redis (message queue), a worker service (.NET), a database (PostgreSQL), and a web result app (Node.js). We will write Kubernetes deployment YAML files for each microservice, manage their deployments, expose the necessary services to the internet, and scale the deployment as needed.
 
-This is based on the modified [example-voting-app](https://github.com/kodekloudhub/example-voting-app-kubernetes.git) repository from the [docker-sample](https://github.com/dockersamples) GitHub page and modified it to work on the Kubernetes cluster.
+This is based on the modified [example-voting-app-kubernetes](https://github.com/kodekloudhub/example-voting-app-kubernetes.git) repository from the [kodekloudhub](https://github.com/kodekloudhub) GitHub page and modified it to work on the Kubernetes cluster.
 
 ## Prerequisites
 
@@ -44,18 +44,19 @@ kubectl create -f postgres-deploy.yaml
 ```
 
 ![Alt text](voting-app-deploy-service-created.png)
-
+voting-app-deploy created.
 ![Alt text](redis-deploy-service-created.png)
-
+redis-deploy created.
 ![Alt text](postgres-deploy-service-created.png)
-
+postgres-deploy created.
 ![Alt text](worker-deploy-created-running.png)
+worker-app-deploy created.
 
 ## Step 4: Exposing the Services
 
 Expose the necessary services to the internet using Kubernetes Services. You may need to expose services like the web vote app and web result app, while keeping others internal.
 
-## PostgreSQL Yaml File
+**PostgreSQL Yaml File**
 
 ![Alt text](postgres-db-security.png)
 
@@ -63,17 +64,19 @@ Expose the necessary services to the internet using Kubernetes Services. You may
 
 ## Apply Services for exposing the web voting-app
 
-Create the Service YAML files:
+Create or apply the Service YAML files:
 
+```bash
 kubectl create -f voting-app-service.yaml
-kubectl create -f redis-service.yaml
+kubectl apply -f redis-service.yaml
 kubectl create -f postgres-service.yaml
-kubectl create -f result-app-service.yaml
+kubectl apply -f result-app-service.yaml
+```
 
 ![Alt text](voting-app-deploy-service-running.png)
 voting-app-service running
 
-![Alt text](redis-deploy-service-running.png))
+![Alt text](redis-deploy-service-running.png)
 redis-service running
 
 ![Alt text](postgres-deploy-service-running.png)
