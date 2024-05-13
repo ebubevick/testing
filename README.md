@@ -22,15 +22,10 @@ Create or download Kubernetes Deployment YAML files the git repository for each 
 
 ![Alt text](deploy_and_services.png)
 
+# YAML Format for Deployment and Service
 
-### Web Vote App Deployment YAML
-
-#```yaml
-# voting-app-deploy.yaml
-
-# Insert deployment YAML for the web vote app
-
-
+![Alt text](deployment_services_format.png)
+what the deployments and services should look like.
 
 ## Step 3: Running the Deployments
 
@@ -46,28 +41,18 @@ kubectl create -f postgres-deploy.yaml
 kubectl create -f result-app-deploy.yaml
 ```
 
-![Alt text](https://github.com/)
+![Alt text](voting-app-deploy-service-created.png)
 
-![Alt text](https://github.com/)
+![Alt text](redis-deploy-service-created.png)
 
-![Alt text](https://github.com/)
+![Alt text](worker-deploy-created-running.png)
 
-![Alt text](https://github.com/)
-
-![Alt text](https://github.com/)
+![Alt text](postgres-deploy-service-created.png)
 
 
 ## Step 4: Exposing the Services
 
 Expose the necessary services to the internet using Kubernetes Services. You may need to expose services like the web vote app and web result app, while keeping others internal.
-
-Create Service YAML files for exposing the services:
-
-#```yaml
-# voting-app-service.yaml
-
-
-
 
 # PostgreSQL Yaml File
 
@@ -75,7 +60,7 @@ Create Service YAML files for exposing the services:
 
 **Caution:** The provided PostgreSQL deployment YAML file uses default credentials (`postgres`/`postgres`) and has security implications. This is suitable for testing and development purposes but is not recommended for production deployments. For production environments, ensure you follow best practices for securing your PostgreSQL deployment. If you need guidance on securing your PostgreSQL deployment for production, feel free to reach out to me on LinkedIn.
 
-# Insert Service YAML for exposing the web vote app
+# Apply Services for exposing the web voting-app
 
 Create the Service YAML files:
 
@@ -121,16 +106,18 @@ Replace <deployment-name> with the name of the deployment you want to scale and 
 
 **For example, to scale from 1 to 7 replicas for the voting-app-deployment:**
 
+```bash
 kubectl scale deployment voting-app --replicas=7
-
+```
 ![Alt text](deploy-scale-incr-7.png)
 
 ![Alt text](deploy-newly-added-pods.png)
+The newly created pods
 
 **And to scale from 7 to 2 replicas:**
-
+```bash
 kubectl scale deployment voting-app --replicas=2
-
+```
 ![Alt text](deploy-decre-2-terminating.png)
 Terminating
 
@@ -143,8 +130,6 @@ kubectl scale deployment voting-app --replicas=3
 
 This command adjusts the number of replicas running for the specified deployment, allowing you to dynamically scale your application based on demand.
 
-
-
 ## Observing Multiple Pods Being Used to Vote
 
 As you vote from different browser windows/tabs, Kubernetes will distribute the requests among the available pods of the voting app deployment. You can verify this by checking the pod logs or using Kubernetes Dashboard to monitor pod activity.
@@ -152,12 +137,13 @@ As you vote from different browser windows/tabs, Kubernetes will distribute the 
 By following these steps, you can demonstrate the functionality of the voting app, view the voting results, and observe multiple pods being utilized for voting simultaneously.
 
 ![Alt text](deploy-pod1-wepage.png)
+voting using pod voting-app-deploy-96f58547f-5mhl7
 
 ![Alt text](deploy-pod2-wepage.png)
-
-![Alt text]()
+voting using pod voting-app-deploy-96f58547f-ptwpl
 
 ![Alt text](2votes-2browser-each-vote-registered-on-a-diff-pod.png)
+voting from two seperate browser and seein the votes
 
 
 
